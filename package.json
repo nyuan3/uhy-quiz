@@ -6,7 +6,9 @@
   "scripts": {
     "build": "esbuild src/index.js --bundle --minify --format=iife --global-name=UHYQuiz --outfile=dist/uhy-quiz.js --loader:.css=text",
     "dev": "esbuild src/index.js --bundle --format=iife --global-name=UHYQuiz --outfile=dist/uhy-quiz.js --sourcemap --watch --loader:.css=text",
-    "lint": "echo \"No lint configured\""
+    "deploy": "gh-pages -d dist",
+    "lint": "echo \"No lint configured\"",
+    "predeploy": "npm run build && node scripts/copy-index.js"
   },
   "keywords": [
     "schoolhouse connection",
@@ -16,8 +18,9 @@
   ],
   "author": "",
   "license": "MIT",
+  "homepage": "https://nyuan3.github.io/uhy-quiz",
   "devDependencies": {
-    "esbuild": "^0.23.0"
+    "esbuild": "^0.23.0",
+    "gh-pages": "^6.3.0"
   }
 }
-
