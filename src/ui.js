@@ -129,13 +129,29 @@ export function createQuiz({ container, tree, config, callbacks = {}, initialPat
     }
   }
 
+function formatPromptSegment(text) {
+  if (!text) return '';
+  if (text.includes('\n\n')) {
+    return text
+      .split('\n\n')
+      .map((segment) => formatPromptSegment(segment.trim()))
+      .join('');
+  }
+  if (text.includes('\n•') || text.trim().startsWith('•')) {
+    const items = text.split('\n').map((line) => line.trim());
+    const bullets = items.flatMap((line) => line.split('•')).map((item) => item.trim()).filter(Boolean);
+    return `<ul class="uhyq-bullet-list">${bullets.map((item) => `<li>${item}</li>`).join('')}</ul>`;
+  }
+
+  return `<p>${text}</p>`;
+}
+
 function formatPromptMarkup(text) {
   if (typeof text !== 'string' || !text.includes('\n')) {
     return text;
   }
 
-  const segments = text.split('\n\n').filter(Boolean);
-  return segments.map((segment) => formatPromptSegment(segment.trim())).join('');
+  return formatPromptSegment(text.trim());
 }
 
 function renderYesNoQuestion(node) {
