@@ -1,0 +1,23 @@
+{
+  "name": "uhy-quiz",
+  "version": "1.0.0",
+  "description": "Self-administered Unaccompanied Homeless Youth determination quiz widget for SchoolHouse Connection.",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --minify --format=iife --global-name=UHYQuiz --outfile=dist/uhy-quiz.js --loader:.css=text",
+    "dev": "esbuild src/index.js --bundle --format=iife --global-name=UHYQuiz --outfile=dist/uhy-quiz.js --sourcemap --watch --loader:.css=text",
+    "lint": "echo \"No lint configured\""
+  },
+  "keywords": [
+    "schoolhouse connection",
+    "quiz",
+    "homeless youth",
+    "faFSA"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.23.0"
+  }
+}
+

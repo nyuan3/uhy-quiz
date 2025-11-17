@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SchoolHouse Connection UHY Quiz Demo</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(135deg, #f5e9ff 0%, #fff4cc 100%);
+        color: #2c2050;
+      }
+      main {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 16px;
+      }
+      .demo-wrapper {
+        width: 100%;
+        max-width: 520px;
+      }
+      .demo-header {
+        margin-bottom: 24px;
+      }
+      .demo-header h1 {
+        margin: 0 0 12px;
+        font-size: 1.75rem;
+        color: #432266;
+      }
+      .demo-header p {
+        margin: 0;
+        line-height: 1.5;
+        color: rgba(44, 32, 80, 0.8);
+      }
+      .demo-wrapper a {
+        color: #5b2c83;
+      }
+      .demo-wrapper a:hover,
+      .demo-wrapper a:focus {
+        color: #432266;
+      }
+      noscript .uhyq-fallback {
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="demo-wrapper">
+        <header class="demo-header">
+          <h1>Unaccompanied Homeless Youth Determination Quiz</h1>
+        </header>
+        <div data-uhy-quiz>
+          <div class="uhyq-fallback" role="note">
+            <p>
+              <strong>This tool needs JavaScript.</strong>
+              If the interactive quiz does not appear, visit
+              <a href="https://schoolhouseconnection.org" target="_blank" rel="noopener noreferrer">
+                SchoolHouseConnection.org
+              </a>
+              for resources for unaccompanied homeless youth.
+            </p>
+          </div>
+        </div>
+        <noscript>
+          <div class="uhyq-fallback" role="note">
+            <p>
+              JavaScript is disabled. View resources at
+              <a href="https://schoolhouseconnection.org" target="_blank" rel="noopener noreferrer">
+                SchoolHouseConnection.org
+              </a>.
+            </p>
+          </div>
+        </noscript>
+      </div>
+    </main>
+    <script src="./dist/uhy-quiz.js" defer></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        if (!window.UHYQuiz) return;
+        window.UHYQuiz.init({
+          onStep: ({ id, index }) => {
+            console.info('[UHYQuiz] Step', id, 'index', index);
+          },
+          onOutcome: ({ id, title }) => {
+            console.info('[UHYQuiz] Outcome', id, title);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
+
