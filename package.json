@@ -4,11 +4,11 @@
   "description": "Self-administered Unaccompanied Homeless Youth determination quiz widget for SchoolHouse Connection.",
   "type": "module",
   "scripts": {
-    "build": "esbuild src/index.js --bundle --minify --format=iife --global-name=UHYQuiz --outfile=dist/uhy-quiz.js --loader:.css=text",
+    "build": "esbuild src/index.js --bundle --minify --format=iife --global-name=UHYQuiz --outfile=dist/uhy-quiz.js --loader:.css=text && node scripts/copy-index.js",
     "dev": "esbuild src/index.js --bundle --format=iife --global-name=UHYQuiz --outfile=dist/uhy-quiz.js --sourcemap --watch --loader:.css=text",
     "deploy": "gh-pages -d dist",
     "lint": "echo \"No lint configured\"",
-    "predeploy": "npm run build && node scripts/copy-index.js"
+    "predeploy": "npm run build"
   },
   "keywords": [
     "schoolhouse connection",
