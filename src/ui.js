@@ -138,9 +138,28 @@ function formatPromptSegment(text) {
       .join('');
   }
   if (text.includes('\n•') || text.trim().startsWith('•')) {
-    const items = text.split('\n').map((line) => line.trim());
-    const bullets = items.flatMap((line) => line.split('•')).map((item) => item.trim()).filter(Boolean);
-    return `<ul class="uhyq-bullet-list">${bullets.map((item) => `<li>${item}</li>`).join('')}</ul>`;
+    const lines = text.split('\n');
+    const bulletStartIndex = lines.findIndex(line => line.trim().startsWith('•'));
+    
+    let result = '';
+    
+    // If there's intro text before bullets, add it as a paragraph
+    if (bulletStartIndex > 0) {
+      const introText = lines.slice(0, bulletStartIndex).join(' ').trim();
+      if (introText) {
+        result += `<p>${introText}</p>`;
+      }
+    }
+    
+    // Process bullet points
+    const bulletLines = lines.slice(bulletStartIndex);
+    const bullets = bulletLines
+      .flatMap((line) => line.split('•'))
+      .map((item) => item.trim())
+      .filter(Boolean);
+    
+    result += `<ul class="uhyq-bullet-list">${bullets.map((item) => `<li>${item}</li>`).join('')}</ul>`;
+    return result;
   }
 
   return `<p>${text}</p>`;
@@ -154,6 +173,16 @@ function formatPromptMarkup(text) {
   return formatPromptSegment(text.trim());
 }
 
+function parseTooltips(text) {
+  if (typeof text !== 'string') return text;
+  
+  // Match [tooltip:word:definition] pattern
+  return text.replace(/\[tooltip:([^:]+):([^\]]+)\]/g, (match, word, definition) => {
+    const helpIcon = `<svg class="uhyq-tooltip-icon" role="button" tabindex="0" aria-label="More information about ${word}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>`;
+    return `${word}<span class="uhyq-tooltip-wrapper">${helpIcon}<span class="uhyq-tooltip-text" role="tooltip">${definition}</span></span>`;
+  });
+}
+
 function renderYesNoQuestion(node) {
     cleanupStepHandlers();
     stepRegion.innerHTML = '';
@@ -161,7 +190,42 @@ function renderYesNoQuestion(node) {
   const promptEl = document.createElement('h2');
   promptEl.id = `${node.id}-prompt`;
 
-  promptEl.innerHTML = formatPromptMarkup(node.prompt);
+  // Split prompt into heading and body if it contains bullets or multiple paragraphs
+  let headingText = node.prompt;
+  let bodyText = '';
+  
+  // Check if prompt contains bullets
+  if (node.prompt.includes('\n•')) {
+    const parts = node.prompt.split(/\n(?=•)/);
+    headingText = parts[0];
+    bodyText = parts.slice(1).join('\n');
+  } else if (node.prompt.includes('\n\n')) {
+    const parts = node.prompt.split('\n\n');
+    headingText = parts[0];
+    bodyText = parts.slice(1).join('\n\n');
+  }
+
+  // Parse tooltips and convert single line breaks in heading to <br> tags
+  if (headingText.includes('[tooltip:') || headingText.includes('\n')) {
+    let processedText = headingText;
+    if (processedText.includes('[tooltip:')) {
+      processedText = parseTooltips(processedText);
+    }
+    if (processedText.includes('\n')) {
+      processedText = processedText.split('\n').join('<br>');
+    }
+    promptEl.innerHTML = processedText;
+  } else {
+    promptEl.textContent = headingText;
+  }
+
+  // Add body content if present
+  let bodyEl = null;
+  if (bodyText) {
+    bodyEl = document.createElement('div');
+    bodyEl.className = 'uhyq-body';
+    bodyEl.innerHTML = formatPromptMarkup(bodyText);
+  }
 
     const choicesEl = document.createElement('div');
     choicesEl.className = 'uhyq-choices';
@@ -188,7 +252,11 @@ function renderYesNoQuestion(node) {
 
     choicesEl.append(yesBtn, noBtn);
 
-    stepRegion.append(promptEl, choicesEl);
+    if (bodyEl) {
+      stepRegion.append(promptEl, bodyEl, choicesEl);
+    } else {
+      stepRegion.append(promptEl, choicesEl);
+    }
 
     disposeBinaryHandler = initBinaryChoiceGroup(choicesEl);
     focusPrimaryAction(stepRegion);
@@ -245,9 +313,9 @@ function renderYesNoQuestion(node) {
     const titleEl = document.createElement('h2');
     titleEl.textContent = node.title;
 
-    const bodyEl = document.createElement('p');
+    const bodyEl = document.createElement('div');
     bodyEl.className = 'uhyq-body';
-    bodyEl.textContent = node.body;
+    bodyEl.innerHTML = formatPromptMarkup(node.body);
 
     const actionsEl = document.createElement('div');
     actionsEl.className = 'uhyq-outcome-actions';

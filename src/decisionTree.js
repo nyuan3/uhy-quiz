@@ -23,7 +23,7 @@ const decisionTree = {
       id: "q_identified_hs",
       type: "yesno",
       prompt:
-        "Were you identified as an unaccompanied homeless youth by a high school counselor, McKinney-Vento liaison, or other high school staff?",
+        "Were you identified as an [tooltip:unaccompanied:not living with a parent or guardian] homeless youth by a high school counselor, McKinney-Vento liaison, or other high school staff?",
       yes: "out_hs_determination_letter",
       no: "q_hs_staff_know"
     },
@@ -32,7 +32,7 @@ const decisionTree = {
       id: "q_hs_staff_know",
       type: "yesno",
       prompt:
-        "Does a McKinney-Vento homeless liaison or other high school staff know about your homelessness?",
+        "If you are currently in high school, does a McKinney-Vento homeless liaison or do other high school staff know you are unaccompanied (you don't live with your parents) and homeless?\nSelect no if you have graduated.",
       yes: "out_hs_become_identified",
       no: "q_live_with_parents"
     },
@@ -50,7 +50,7 @@ const decisionTree = {
       id: "q_temp_since_july",
       type: "yesno",
       prompt:
-        "Since July 1 of the previous school year, have you had to stay somewhere temporarily because you didn’t have anywhere else to go? For example:\n\n• Staying with friends or relatives because you lost housing or couldn’t afford rent\n• “Couch surfing” or moving from place to place\n• Living in residence halls/dorms but you would otherwise have no safe place to go",
+        "Since July 1 of the previous school year, have you had to stay somewhere temporarily because you didn't have anywhere else to go?\n\nFor example:\n• Staying with friends or relatives because you lost housing or couldn't afford rent\n• \"Couch surfing\" or moving from place to place\n• Living in residence halls/dorms but you would otherwise have no safe place to go",
       yes: "q_can_someone_confirm",
       no: "q_not_meant_for_living"
     },
@@ -59,7 +59,7 @@ const decisionTree = {
       id: "q_not_meant_for_living",
       type: "yesno",
       prompt:
-        "Since July 1 of the previous school year, have you stayed in a place not meant for people to live? For example:\n\n• A motel or hotel because you had no other housing\n• A trailer park, campground, car, park, or abandoned building",
+        "Since July 1 of the previous school year, have you stayed in a place not meant for people to live?\n\nFor example:\n• A motel or hotel because you had no other housing\n• A trailer park, campground, car, park, or abandoned building",
       yes: "q_can_someone_confirm",
       no: "q_at_risk"
     },
@@ -68,7 +68,7 @@ const decisionTree = {
       id: "q_at_risk",
       type: "yesno",
       prompt:
-        "Are you at risk of losing your housing soon or not having a safe place to stay? For example:\n\n• Being told you can’t stay where you are much longer\n• Having a pending eviction\n• Not knowing where you’ll sleep next week or next month",
+        "Are you at risk of losing your housing soon or not having a safe place to stay?\n\nFor example:\n• Being told you can't stay where you are much longer\n• Having a pending eviction\n• Not knowing where you'll sleep next week or next month",
       yes: "q_pay_all_expenses",
       no: "q_dep_support_from_parents"
     },
@@ -87,7 +87,7 @@ const decisionTree = {
       id: "q_can_someone_confirm",
       type: "yesno",
       prompt:
-        "Can any of the following individuals confirm your situation?\n\n• A high school McKinney-Vento liaison or their designee (e.g., a school counselor)\n• The director (or designee) of a shelter, drop-in center, or other program serving individuals experiencing homelessness\n• The director (or designee) of a TRIO or GEAR UP program\n• A financial aid administrator at your current or a previous college/university who has already made a similar determination",
+        "Can any of the following individuals confirm your situation?\n• A high school McKinney-Vento liaison or their designee (e.g., a school counselor)\n• The director (or designee) of a shelter, drop-in center, or other program serving individuals experiencing homelessness\n• The director (or designee) of a TRIO or GEAR UP program\n• Financial aid administrator at current college/university or your previous college/university who previously made a determination",
       yes: "out_third_party_determination",
       no: "q_still_staying_temp"
     },
@@ -96,7 +96,7 @@ const decisionTree = {
       id: "q_still_staying_temp",
       type: "yesno",
       prompt:
-        "Are you still staying somewhere temporarily, or in a situation like the ones mentioned above?",
+        "As of today, are you staying in one of the following situations?\n\n• Staying with friends or relatives (like an aunt or uncle) because you lost housing or couldn't afford rent\n• \"Couch surfing\" or moving from place to place\n• Living in residence halls/dorms but would otherwise have no place to go\n• A motel or hotel because you had no other housing\n• A trailer park, campground, car, park, or abandoned building\n• At risk of losing your housing soon",
       yes: "out_faa_determination_uhy",
       no: "q_dep_support_from_parents"
     },
@@ -122,7 +122,7 @@ const decisionTree = {
       id: "q_dep_abuse_or_unknown",
       type: "yesno",
       prompt:
-        "Do either of the following apply?\n\n• You do not know where your parents are or how to contact them\n• You left home due to an abusive or unsafe situation",
+        "Do any of the following apply?\n• You do not know where your parents are or how to contact them\n• You left home due to an abusive or unsafe situation\n• Your parents are incarcerated or institutionalized",
       yes: "out_may_qualify_dependency_override",
       no: "out_likely_dependent_contact_faa"
     },
@@ -255,7 +255,7 @@ const decisionTree = {
       type: "outcome",
       title: "You may qualify for a dependency override",
       body:
-        "Because you do not have contact with your parents and/or left home due to an abusive or unsafe situation, you may qualify for a dependency override. Submit the FAFSA as an independent student and follow up with your school’s financial aid office.\n\nThey will need a statement from you describing your circumstances, and they will likely need signed statements from people who know you and can confirm your situation.\n\nNote that the following circumstances on their own usually do NOT qualify for a dependency override:\n• You do not live with your parents\n• You are financially self-sufficient\n• Your parents do not claim you on their taxes\n• Your parents are not helping with college expenses\n• Your parents do not want to provide their information or refuse to complete the FAFSA",
+        "Because you do not have contact with your parents and/or left home due to an abusive or unsafe situation, you may qualify for a dependency override. Submit the FAFSA as an independent student and follow up with your school's financial aid office.\n\nThey will need a statement from you describing your circumstances, and they will likely need signed statements from people who know you and can confirm your situation.\n\nNote that the following circumstances on their own usually do NOT qualify for a dependency override:\n\n• You do not live with your parents\n\n• You are financially self-sufficient\n\n• Your parents do not claim you on their taxes\n\n• Your parents are not helping with college expenses\n\n• Your parents do not want to provide their information or refuse to complete the FAFSA",
       actions: [
         { label: "Go to FAFSA.gov", href: "https://studentaid.gov/h/apply-for-aid/fafsa" },
         { label: "How to answer FAFSA questions", href: "__FAFSA_GUIDE_URL__" }
