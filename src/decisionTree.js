@@ -32,7 +32,7 @@ const decisionTree = {
       id: "q_hs_staff_know",
       type: "yesno",
       prompt:
-        "If you are currently in high school, does a McKinney-Vento homeless liaison or do other high school staff know you are unaccompanied (you don't live with your parents) and homeless?\nSelect no if you have graduated.",
+        "If you are currently in high school, does a McKinney-Vento homeless liaison or do other high school staff know you are [tooltip:unaccompanied:you don't live with your parents] and homeless? Select no if you have graduated.",
       yes: "out_hs_become_identified",
       no: "q_live_with_parents"
     },
@@ -135,7 +135,7 @@ const decisionTree = {
       type: "outcome",
       title: "You are automatically considered an independent student",
       body:
-        "Because you are 24 or older, you are automatically considered an independent student for FAFSA purposes. You should complete the FAFSA without parental information. Only use your own information (and your spouse’s, if you are currently married).",
+        "Because you are 24 or older, you are automatically considered an independent student for FAFSA purposes. You should submit the FAFSA without parental information. Only use your own information (and your spouse’s, if you are currently married).",
       actions: [
         { label: "Go to FAFSA.gov", href: "https://studentaid.gov/h/apply-for-aid/fafsa" }
       ]
@@ -147,7 +147,7 @@ const decisionTree = {
       type: "outcome",
       title: "Complete the FAFSA with parental information",
       body:
-        "Based on your answers, you are considered a dependent student and should complete the FAFSA including your parents’ information.",
+        "Based on your answers, you are considered a dependent student and should submit the FAFSA including your parents’ information.",
       actions: [
         { label: "Go to FAFSA.gov", href: "https://studentaid.gov/h/apply-for-aid/fafsa" },
       ]
@@ -159,7 +159,7 @@ const decisionTree = {
       type: "outcome",
       title: "Request a determination letter from your high school",
       body:
-        "You were identified as an unaccompanied homeless youth by your high school. Contact your McKinney-Vento liaison or high school counselor and request a written determination letter stating that you are (or were) an unaccompanied homeless youth. Give this letter to your financial aid office when you complete the FAFSA.",
+        "You were identified as an unaccompanied homeless youth by your high school. Contact your McKinney-Vento liaison or high school counselor and request a written determination letter stating that you are (or were) an unaccompanied homeless youth. Give this letter to your financial aid office when you submit the FAFSA.",
       actions: [
         {
           label: "Find your McKinney-Vento liaison",
@@ -199,7 +199,7 @@ const decisionTree = {
       type: "outcome",
       title: "Ask a program or liaison to provide a determination",
       body:
-        "Someone who knows your situation (such as a McKinney-Vento liaison, shelter or program director, TRIO/GEAR UP staff, or a financial aid administrator) can provide a written determination that you are an unaccompanied homeless youth. Give this documentation to your financial aid office. You will then complete the FAFSA as an independent student, without parent information.",
+        "Someone who knows your situation (such as a McKinney-Vento liaison, shelter or program director, TRIO/GEAR UP staff, or a financial aid administrator) can provide a written determination that you are an unaccompanied homeless youth. First, submit the FAFSA as an independent student, without parent information, and thengive this documentation to your financial aid office.",
       actions: [
         {
           label: "Sample determination letters",
@@ -229,7 +229,7 @@ const decisionTree = {
       type: "outcome",
       title: "You are a dependent student for FAFSA",
       body:
-        "Because you receive financial support from your parents, you will be considered a dependent student for FAFSA purposes and will need to report your parents’ information on the FAFSA.",
+        "You are considered a dependent student for FAFSA purposes and will need to report your parents’ information on the FAFSA.",
       actions: [
         { label: "Go to FAFSA.gov", href: "https://studentaid.gov/h/apply-for-aid/fafsa" },
         { label: "How to answer FAFSA questions", href: "__FAFSA_GUIDE_URL__" }
@@ -255,7 +255,8 @@ const decisionTree = {
       type: "outcome",
       title: "You may qualify for a dependency override",
       body:
-        "Because you do not have contact with your parents and/or left home due to an abusive or unsafe situation, you may qualify for a dependency override. Submit the FAFSA as an independent student and follow up with your school's financial aid office.\n\nThey will need a statement from you describing your circumstances, and they will likely need signed statements from people who know you and can confirm your situation.\n\nNote that the following circumstances on their own usually do NOT qualify for a dependency override:\n\n• You do not live with your parents\n\n• You are financially self-sufficient\n\n• Your parents do not claim you on their taxes\n\n• Your parents are not helping with college expenses\n\n• Your parents do not want to provide their information or refuse to complete the FAFSA",
+        "Answer \"yes\" to the question on the FAFSA asking if any unusual circumstances prevent you from reporting parent information. This will let you submit the FAFSA as an independent student. You will need to follow up with your school's financial aid office. They will need a statement from you about your circumstances, and will likely need signed statements from people who know you and can confirm your situation.\n\nNote that the following circumstances on their own do not qualify for a dependency override:\n\n• You do not live with your parents\n• You are financially self-sufficient\n• Your parents do not claim you on their taxes\n• Your parents are not helping with college expenses\n• Your parents do not want to provide their information or they refuse to submit the FAFSA",
+  
       actions: [
         { label: "Go to FAFSA.gov", href: "https://studentaid.gov/h/apply-for-aid/fafsa" },
         { label: "How to answer FAFSA questions", href: "__FAFSA_GUIDE_URL__" }
