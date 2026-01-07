@@ -159,7 +159,7 @@ const decisionTree = {
       type: "outcome",
       title: "Request a determination letter from your high school",
       body:
-        "You were identified as an unaccompanied homeless youth by your high school. Contact your McKinney-Vento liaison or high school counselor and request a written determination letter stating that you are (or were) an unaccompanied homeless youth. Give this letter to your financial aid office when you submit the FAFSA.",
+        "You were identified as an unaccompanied homeless youth by your high school. Contact your McKinney-Vento liaison or high school counselor and request a written determination letter stating that you are (or were) an unaccompanied homeless youth. First, submit the FAFSA as an independent student, without parent information, and then give this documentation to your financial aid office.",
       actions: [
         {
           label: "Find your McKinney-Vento liaison",
@@ -199,7 +199,7 @@ const decisionTree = {
       type: "outcome",
       title: "Ask a program or liaison to provide a determination",
       body:
-        "Someone who knows your situation (such as a McKinney-Vento liaison, shelter or program director, TRIO/GEAR UP staff, or a financial aid administrator) can provide a written determination that you are an unaccompanied homeless youth. First, submit the FAFSA as an independent student, without parent information, and thengive this documentation to your financial aid office.",
+        "Someone who knows your situation (such as a McKinney-Vento liaison, shelter or program director, TRIO/GEAR UP staff, or a financial aid administrator) can provide a written determination that you are an unaccompanied homeless youth. First, submit the FAFSA as an independent student, without parent information, and then give this documentation to your financial aid office.",
       actions: [
         {
           label: "Sample determination letters",
@@ -215,7 +215,7 @@ const decisionTree = {
       type: "outcome",
       title: "Request a determination from your financial aid office",
       body:
-        "Because you are in a homeless or at-risk-of-homelessness situation and don’t have another person who can document it, contact your school’s financial aid office and request a determination as an unaccompanied homeless youth. They may ask you questions or request a written statement from you and from people who know your situation.",
+        "Because you are in a homeless or at-risk-of-homelessness situation and don’t have another person who can document it, contact your school’s financial aid office and request a determination as an unaccompanied homeless youth. They may ask you some questions or request a written statement from you about your situation.",
       actions: [
         
         { label: "Go to FAFSA.gov", href: "https://studentaid.gov/h/apply-for-aid/fafsa" },
@@ -242,7 +242,7 @@ const decisionTree = {
       type: "outcome",
       title: "You will most likely be considered a dependent student",
       body:
-        "Based on your answers, you will most likely be considered a dependent student and will need to include your parents’ information on the FAFSA. If you have unusual circumstances, contact your school’s financial aid office and explain your situation.",
+        "Based on your answers, you will most likely be considered a dependent student and will need to include your parents’ information on the FAFSA. If you have unusual circumstances that prevent you from reporting parent information, contact your school's financial aid office and explain your situation.",
       actions: [
         { label: "Go to FAFSA.gov", href: "https://studentaid.gov/h/apply-for-aid/fafsa" },
         { label: "How to answer FAFSA questions", href: "https://schoolhouseconnection.org/article/how-to-answer-fafsa-questions-about-homelessness" }
