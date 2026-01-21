@@ -7,23 +7,23 @@ const decisionTree = {
       type: "yesno",
       prompt: "Are you 24 years or older?",
       yes: "out_auto_independent_24plus",
-      no: "q_recent_hs"
+      no: "q_current_hs"
     },
 
-    q_recent_hs: {
-      id: "q_recent_hs",
+    q_current_hs: {
+      id: "q_current_hs",
       type: "yesno",
-      prompt:
-        "Are you currently attending a public high school or did you graduate from a public high school in the last year?",
-      yes: "q_identified_hs",
-      no: "q_live_with_parents"
+      prompt: "Are you currently in public high school?",
+      yes: "q_identified_hs_current",
+      no: "q_graduated_recent"
     },
 
-    q_identified_hs: {
-      id: "q_identified_hs",
+    // Branch for current high school students
+    q_identified_hs_current: {
+      id: "q_identified_hs_current",
       type: "yesno",
       prompt:
-        "Were you identified as an [tooltip:unaccompanied:not living with a parent or guardian] homeless youth by a high school counselor, McKinney-Vento liaison, or other high school staff?",
+        "Have you been identified as an [tooltip:unaccompanied:not living with a parent or guardian] homeless youth by a high school counselor, McKinney-Vento [helplink:liaison:https://schoolhouseconnection.org/homeless-education-directory:Find your liaison], or other high school staff?",
       yes: "out_hs_determination_letter",
       no: "q_hs_staff_know"
     },
@@ -32,8 +32,26 @@ const decisionTree = {
       id: "q_hs_staff_know",
       type: "yesno",
       prompt:
-        "If you are currently in high school, does a McKinney-Vento homeless liaison or do other high school staff know you are [tooltip:unaccompanied:you don't live with your parents] and homeless? Select no if you have graduated.",
+        "Does a McKinney-Vento homeless [helplink:liaison:https://schoolhouseconnection.org/homeless-education-directory:Find your liaison] or do other high school staff know you are [tooltip:unaccompanied:you don't live with your parents] and homeless?",
       yes: "out_hs_become_identified",
+      no: "q_live_with_parents"
+    },
+
+    // Branch for recent graduates
+    q_graduated_recent: {
+      id: "q_graduated_recent",
+      type: "yesno",
+      prompt: "Did you graduate from a public high school in the last year?",
+      yes: "q_identified_hs_grad",
+      no: "q_live_with_parents"
+    },
+
+    q_identified_hs_grad: {
+      id: "q_identified_hs_grad",
+      type: "yesno",
+      prompt:
+        "While you were in high school, were you identified as an [tooltip:unaccompanied:not living with a parent or guardian] homeless youth by a high school counselor, McKinney-Vento [helplink:liaison:https://schoolhouseconnection.org/homeless-education-directory:Find your liaison], or other high school staff?",
+      yes: "out_hs_determination_letter",
       no: "q_live_with_parents"
     },
 
@@ -87,7 +105,7 @@ const decisionTree = {
       id: "q_can_someone_confirm",
       type: "yesno",
       prompt:
-        "Can any of the following individuals confirm your situation?\n• A high school McKinney-Vento liaison or their designee (e.g., a school counselor)\n• The director (or designee) of a shelter, drop-in center, or other program serving individuals experiencing homelessness\n• The director (or designee) of a TRIO or GEAR UP program\n• Financial aid administrator at current college/university or your previous college/university who previously made a determination",
+        "Can any of the following individuals confirm your situation?\n• A high school McKinney-Vento [helplink:liaison:https://schoolhouseconnection.org/homeless-education-directory:Find your liaison] or their designee (e.g., a school counselor)\n• The director (or designee) of a shelter, drop-in center, or other program serving individuals experiencing homelessness\n• The director (or designee) of a TRIO or GEAR UP program\n• Financial aid administrator at current college/university or your previous college/university who previously made a determination",
       yes: "out_third_party_determination",
       no: "q_still_staying_temp"
     },

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Unaccompanied Homeless Youth Determination Quiz</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(135deg, #f5e9ff 0%, #fff4cc 100%);
+        color: #2c2050;
+      }
+      main {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 16px;
+      }
+      .demo-wrapper {
+        width: 100%;
+        max-width: 520px;
+      }
+      .demo-header {
+        margin-bottom: 24px;
+      }
+      .demo-header h1 {
+        margin: 0 0 12px;
+        font-size: 1.75rem;
+        color: #432266;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="demo-wrapper">
+        <header class="demo-header">
+          <h1>Unaccompanied Homeless Youth Determination Quiz</h1>
+        </header>
+        <div data-uhy-quiz></div>
+      </div>
+    </main>
+    <script>
+var UHYQuiz=(()=>{var P=Object.defineProperty;var se=Object.getOwnPropertyDescriptor;var le=Object.getOwnPropertyNames;var ue=Object.prototype.hasOwnProperty;var ce=(t,o)=>{for(var a in o)P(t,a,{get:o[a],enumerable:!0})},de=(t,o,a,l)=>{if(o&&typeof o=="object"||typeof o=="function")for(let u of le(o))!ue.call(t,u)&&u!==a&&P(t,u,{get:()=>o[u],enumerable:!(l=se(o,u))||l.enumerable});return t};var pe=t=>de(P({},"__esModule",{value:!0}),t);var ke={};ce(ke,{default:()=>ve,destroyAll:()=>W,init:()=>ee,restartAll:()=>Z});var he={startId:"q_age",nodes:{q_age:{id:"q_age",type:"yesno",prompt:"Are you 24 years or older?",yes:"out_auto_independent_24plus",no:"q_recent_hs"},q_recent_hs:{id:"q_recent_hs",type:"yesno",prompt:"Are you currently attending a public high school or did you graduate from a public high school in the last year?",yes:"q_identified_hs",no:"q_live_with_parents"},q_identified_hs:{id:"q_identified_hs",type:"yesno",prompt:"Were you identified as an [tooltip:unaccompanied:not living with a parent or guardian] homeless youth by a high school counselor, McKinney-Vento liaison, or other high school staff?",yes:"out_hs_determination_letter",no:"q_hs_staff_know"},q_hs_staff_know:{id:"q_hs_staff_know",type:"yesno",prompt:"If you are currently in high school, does a McKinney-Vento homeless liaison or do other high school staff know you are [tooltip:unaccompanied:you don't live with your parents] and homeless? Select no if you have graduated.",yes:"out_hs_become_identified",no:"q_live_with_parents"},q_live_with_parents:{id:"q_live_with_parents",type:"yesno",prompt:"Do you live with your parents?",yes:"out_fafsa_parent",no:"q_temp_since_july"},q_temp_since_july:{id:"q_temp_since_july",type:"yesno",prompt:`Since July 1 of the previous school year, have you had to stay somewhere temporarily because you didn't have anywhere else to go?
+
+For example:
+\u2022 Staying with friends or relatives because you lost housing or couldn't afford rent
+\u2022 "Couch surfing" or moving from place to place
+\u2022 Living in residence halls/dorms but you would otherwise have no safe place to go`,yes:"q_can_someone_confirm",no:"q_not_meant_for_living"},q_not_meant_for_living:{id:"q_not_meant_for_living",type:"yesno",prompt:`Since July 1 of the previous school year, have you stayed in a place not meant for people to live?
+
+For example:
+\u2022 A motel or hotel because you had no other housing
+\u2022 A trailer park, campground, car, park, or abandoned building`,yes:"q_can_someone_confirm",no:"q_at_risk"},q_at_risk:{id:"q_at_risk",type:"yesno",prompt:`Are you at risk of losing your housing soon or not having a safe place to stay?
+
+For example:
+\u2022 Being told you can't stay where you are much longer
+\u2022 Having a pending eviction
+\u2022 Not knowing where you'll sleep next week or next month`,yes:"q_pay_all_expenses",no:"q_dep_support_from_parents"},q_pay_all_expenses:{id:"q_pay_all_expenses",type:"yesno",prompt:"Do you pay for all of your own expenses, including your housing? (Only answer \u201CYes\u201D if you do not receive any financial support from anyone.)",yes:"q_can_someone_confirm",no:"q_dep_support_from_parents"},q_can_someone_confirm:{id:"q_can_someone_confirm",type:"yesno",prompt:`Can any of the following individuals confirm your situation?
+\u2022 A high school McKinney-Vento liaison or their designee (e.g., a school counselor)
+\u2022 The director (or designee) of a shelter, drop-in center, or other program serving individuals experiencing homelessness
+\u2022 The director (or designee) of a TRIO or GEAR UP program
+\u2022 Financial aid administrator at current college/university or your previous college/university who previously made a determination`,yes:"out_third_party_determination",no:"q_still_staying_temp"},q_still_staying_temp:{id:"q_still_staying_temp",type:"yesno",prompt:`As of today, are you staying in one of the following situations?
+
+\u2022 Staying with friends or relatives (like an aunt or uncle) because you lost housing or couldn't afford rent
+\u2022 "Couch surfing" or moving from place to place
+\u2022 Living in residence halls/dorms but would otherwise have no place to go
+\u2022 A motel or hotel because you had no other housing
+\u2022 A trailer park, campground, car, park, or abandoned building
+\u2022 At risk of losing your housing soon`,yes:"out_faa_determination_uhy",no:"q_dep_support_from_parents"},q_dep_support_from_parents:{id:"q_dep_support_from_parents",type:"yesno",prompt:"Do you receive any financial support from either of your parents?",yes:"out_dependent_parent_info",no:"q_dep_contact_with_parents"},q_dep_contact_with_parents:{id:"q_dep_contact_with_parents",type:"yesno",prompt:"Do you have contact with your parents?",yes:"out_likely_dependent_contact_faa",no:"q_dep_abuse_or_unknown"},q_dep_abuse_or_unknown:{id:"q_dep_abuse_or_unknown",type:"yesno",prompt:`Do any of the following apply?
+\u2022 You do not know where your parents are or how to contact them
+\u2022 You left home due to an abusive or unsafe situation
+\u2022 Your parents are incarcerated or institutionalized`,yes:"out_may_qualify_dependency_override",no:"out_likely_dependent_contact_faa"},out_auto_independent_24plus:{id:"out_auto_independent_24plus",type:"outcome",title:"You are automatically considered an independent student",body:"Because you are 24 or older, you are automatically considered an independent student for FAFSA purposes. You should submit the FAFSA without parental information. Only use your own information (and your spouse\u2019s, if you are currently married).",actions:[{label:"Go to FAFSA.gov",href:"https://studentaid.gov/h/apply-for-aid/fafsa"}]},out_fafsa_parent:{id:"out_fafsa_parent",type:"outcome",title:"Complete the FAFSA with parental information",body:"Based on your answers, you are considered a dependent student and should submit the FAFSA including your parents\u2019 information.",actions:[{label:"Go to FAFSA.gov",href:"https://studentaid.gov/h/apply-for-aid/fafsa"}]},out_hs_determination_letter:{id:"out_hs_determination_letter",type:"outcome",title:"Request a determination letter from your high school",body:"You were identified as an unaccompanied homeless youth by your high school. Contact your McKinney-Vento liaison or high school counselor and request a written determination letter stating that you are (or were) an unaccompanied homeless youth. Give this letter to your financial aid office when you submit the FAFSA.",actions:[{label:"Find your McKinney-Vento liaison",href:"https://schoolhouseconnection.org/homeless-education-directory"},{label:"Sample determination letters",href:"https://schoolhouseconnection.org/article/sample-form-letters-to-determine-independent-student-status-of-unaccompanied-homeless-youth-for-the-fafsa"},{label:"Go to FAFSA.gov",href:"https://studentaid.gov/h/apply-for-aid/fafsa"}]},out_hs_become_identified:{id:"out_hs_become_identified",type:"outcome",title:"Talk to your high school about being identified under McKinney-Vento",body:"Because your high school staff know about your homelessness, contact your McKinney-Vento liaison or school counselor to be formally identified as homeless under the McKinney-Vento Act. Once identified, you can request a determination letter as an unaccompanied homeless youth to give to your financial aid office.",actions:[{label:"Find your McKinney-Vento liaison",href:"https://schoolhouseconnection.org/homeless-education-directory"},{label:"Sample determination letters",href:"https://schoolhouseconnection.org/article/sample-form-letters-to-determine-independent-student-status-of-unaccompanied-homeless-youth-for-the-fafsa"},{label:"Go to FAFSA.gov",href:"https://studentaid.gov/h/apply-for-aid/fafsa"}]},out_third_party_determination:{id:"out_third_party_determination",type:"outcome",title:"Ask a program or liaison to provide a determination",body:"Someone who knows your situation (such as a McKinney-Vento liaison, shelter or program director, TRIO/GEAR UP staff, or a financial aid administrator) can provide a written determination that you are an unaccompanied homeless youth. First, submit the FAFSA as an independent student, without parent information, and thengive this documentation to your financial aid office.",actions:[{label:"Sample determination letters",href:"https://schoolhouseconnection.org/article/sample-form-letters-to-determine-independent-student-status-of-unaccompanied-homeless-youth-for-the-fafsa"},{label:"Go to FAFSA.gov",href:"https://studentaid.gov/h/apply-for-aid/fafsa"}]},out_faa_determination_uhy:{id:"out_faa_determination_uhy",type:"outcome",title:"Request a determination from your financial aid office",body:"Because you are in a homeless or at-risk-of-homelessness situation and don\u2019t have another person who can document it, contact your school\u2019s financial aid office and request a determination as an unaccompanied homeless youth. They may ask you questions or request a written statement from you and from people who know your situation.",actions:[{label:"Go to FAFSA.gov",href:"https://studentaid.gov/h/apply-for-aid/fafsa"},{label:"How to answer FAFSA questions",href:"https://schoolhouseconnection.org/article/how-to-answer-fafsa-questions-about-homelessness"}]},out_dependent_parent_info:{id:"out_dependent_parent_info",type:"outcome",title:"You are a dependent student for FAFSA",body:"You are considered a dependent student for FAFSA purposes and will need to report your parents\u2019 information on the FAFSA.",actions:[{label:"Go to FAFSA.gov",href:"https://studentaid.gov/h/apply-for-aid/fafsa"},{label:"How to answer FAFSA questions",href:"__FAFSA_GUIDE_URL__"}]},out_likely_dependent_contact_faa:{id:"out_likely_dependent_contact_faa",type:"outcome",title:"You will most likely be considered a dependent student",body:"Based on your answers, you will most likely be considered a dependent student and will need to include your parents\u2019 information on the FAFSA. If you have unusual circumstances, contact your school\u2019s financial aid office and explain your situation.",actions:[{label:"Go to FAFSA.gov",href:"https://studentaid.gov/h/apply-for-aid/fafsa"},{label:"How to answer FAFSA questions",href:"https://schoolhouseconnection.org/article/how-to-answer-fafsa-questions-about-homelessness"}]},out_may_qualify_dependency_override:{id:"out_may_qualify_dependency_override",type:"outcome",title:"You may qualify for a dependency override",body:`Answer "yes" to the question on the FAFSA asking if any unusual circumstances prevent you from reporting parent information. This will let you submit the FAFSA as an independent student. You will need to follow up with your school's financial aid office. They will need a statement from you about your circumstances, and will likely need signed statements from people who know you and can confirm your situation.
+
+Note that the following circumstances on their own do not qualify for a dependency override:
+
+\u2022 You do not live with your parents
+\u2022 You are financially self-sufficient
+\u2022 Your parents do not claim you on their taxes
+\u2022 Your parents are not helping with college expenses
+\u2022 Your parents do not want to provide their information or they refuse to submit the FAFSA`,actions:[{label:"Go to FAFSA.gov",href:"https://studentaid.gov/h/apply-for-aid/fafsa"},{label:"How to answer FAFSA questions",href:"__FAFSA_GUIDE_URL__"}]}}},j=he;var fe={links:{FAFSA:"https://studentaid.gov/h/apply-for-aid/fafsa",TEMPLATE_LIAISON:"https://docs.google.com/document/d/1i7Z4b-eQwXLOHdEkzQXGTFDqq_pqxiBmPcNyqc4w48o/edit?tab=t.0",TEMPLATE_PROGRAM:"https://docs.google.com/document/d/1i7Z4b-eQwXLOHdEkzQXGTFDqq_pqxiBmPcNyqc4w48o/edit?tab=t.0",TEMPLATE_TRIO:"https://docs.google.com/document/d/1i7Z4b-eQwXLOHdEkzQXGTFDqq_pqxiBmPcNyqc4w48o/edit?tab=t.0",TEMPLATE_FAA:"https://docs.google.com/document/d/1i7Z4b-eQwXLOHdEkzQXGTFDqq_pqxiBmPcNyqc4w48o/edit?tab=t.0",FAFSA_GUIDE_URL:"https://schoolhouseconnection.org/article/how-to-answer-fafsa-questions-about-homelessness"},i18n:{locale:"en-US"}},Q=fe;function z(t){if(!t)return()=>{};let o=Array.from(t.querySelectorAll("button"));if(o.length===0)return()=>{};let a=l=>{if(!["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(l.key))return;l.preventDefault();let u=o.indexOf(document.activeElement);if(u===-1){o[0].focus();return}let m=l.key==="ArrowLeft"||l.key==="ArrowUp"?-1:1,A=(u+m+o.length)%o.length;o[A].focus()};return t.addEventListener("keydown",a),()=>{t.removeEventListener("keydown",a)}}function H(t){if(!t)return;let o=t.querySelector("[data-uhyq-focus]");o&&o.focus()}function V(t,o){if(!t||typeof o!="function")return()=>{};let a=l=>{l.key==="Escape"&&o(l)};return t.addEventListener("keydown",a),()=>{t.removeEventListener("keydown",a)}}function R(t,o){t&&(t.textContent="",window.requestAnimationFrame(()=>{t.textContent=o}))}var ye=`
+  <div class="uhyq-fallback" role="note">
+    <p><strong>This tool needs JavaScript.</strong> If the interactive quiz does not load, visit SchoolHouse Connection for <a href="https://schoolhouseconnection.org" target="_blank" rel="noopener noreferrer">resources for unaccompanied homeless youth</a>.</p>
+  </div>
+`;function me(t,o){if(!t)return"#";let a={__FAFSA_URL__:o.FAFSA,__TEMPLATE_LIAISON__:o.TEMPLATE_LIAISON,__TEMPLATE_PROGRAM__:o.TEMPLATE_PROGRAM,__TEMPLATE_TRIO__:o.TEMPLATE_TRIO,__TEMPLATE_FAA__:o.TEMPLATE_FAA,__FAFSA_GUIDE_URL__:o.FAFSA_GUIDE_URL};return a[t]?a[t]:t}function $(t,o){let a=t.nodes[o];if(!a||a.type!=="yesno")return 0;let l=t.nodes[a.yes],u=t.nodes[a.no],m=null;return l&&l.type==="yesno"&&(m=a.yes),u&&u.type==="yesno"&&(m?m=a.yes:m=a.no),1+(m?$(t,m):0)}function _e(t,o){return o?`${t}:${o}`:t}function K({container:t,tree:o,config:a,callbacks:l={},initialPathSegments:u=[]}){let m=a?.links??{},A=typeof l.onStep=="function"?l.onStep:()=>{},T=typeof l.onOutcome=="function"?l.onOutcome:()=>{},G=t.innerHTML.trim()||ye;t.innerHTML="";let f=document.createElement("div");f.className="uhyq-root",f.setAttribute("role","application"),f.setAttribute("aria-label","Unaccompanied homeless youth determination quiz");let w=document.createElement("div");w.className="uhyq-progress",w.setAttribute("role","status");let h=document.createElement("div");h.className="uhyq-card",h.setAttribute("aria-live","polite");let b=document.createElement("div");b.className="uhyq-sr-only",b.setAttribute("aria-live","polite"),b.setAttribute("aria-atomic","true");let L=document.createElement("div");L.className="uhyq-controls";let _=document.createElement("button");_.type="button",_.className="uhyq-btn uhyq-btn-secondary",_.textContent="Back",_.setAttribute("aria-label","Go to previous question"),_.disabled=!0;let x=document.createElement("button");x.type="button",x.className="uhyq-btn uhyq-btn-secondary",x.textContent="Restart",x.setAttribute("aria-label","Restart quiz"),L.append(_,x),f.append(w,h,L,b),t.appendChild(f);let d={currentId:o.startId,history:[],pathSegments:[]},E=null,N=V(f,()=>{window.confirm("Restart the quiz? Your answers will be cleared.")&&M()});function I(){E&&(E(),E=null)}function Y(e){if(!e)return"";if(e.includes(`
+
+`))return e.split(`
+
+`).map(n=>Y(n.trim())).join("");if(e.includes(`
+\u2022`)||e.trim().startsWith("\u2022")){let n=e.split(`
+`),r=n.findIndex(s=>s.trim().startsWith("\u2022")),i="";if(r>0){let s=n.slice(0,r).join(" ").trim();s&&(i+=`<p>${s}</p>`)}let p=n.slice(r).flatMap(s=>s.split("\u2022")).map(s=>s.trim()).filter(Boolean);return i+=`<ul class="uhyq-bullet-list">${p.map(s=>`<li>${s}</li>`).join("")}</ul>`,i}return`<p>${e}</p>`}function O(e){return typeof e!="string"||!e.includes(`
+`)?e:Y(e.trim())}function oe(e){return typeof e!="string"?e:e.replace(/\[tooltip:([^:]+):([^\]]+)\]/g,(n,r,i)=>{let c=`<svg class="uhyq-tooltip-icon" role="button" tabindex="0" aria-label="More information about ${r}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>`;return`${r}<span class="uhyq-tooltip-wrapper">${c}<span class="uhyq-tooltip-text" role="tooltip">${i}</span></span>`})}function ne(e){I(),h.innerHTML="";let n=document.createElement("h2");n.id=`${e.id}-prompt`;let r=e.prompt,i="";if(e.prompt.includes(`
+\u2022`)){let y=e.prompt.split(/\n(?=•)/);r=y[0],i=y.slice(1).join(`
+`)}else if(e.prompt.includes(`
+
+`)){let y=e.prompt.split(`
+
+`);r=y[0],i=y.slice(1).join(`
+
+`)}if(r.includes("[tooltip:")||r.includes(`
+`)){let y=r;y.includes("[tooltip:")&&(y=oe(y)),y.includes(`
+`)&&(y=y.split(`
+`).join("<br>")),n.innerHTML=y}else n.textContent=r;let c=null;i&&(c=document.createElement("div"),c.className="uhyq-body",c.innerHTML=O(i));let p=document.createElement("div");p.className="uhyq-choices",p.setAttribute("role","group"),p.setAttribute("aria-labelledby",n.id);let s={value:"yes",label:"Yes",nextId:e.yes,segmentValue:"yes"},g={value:"no",label:"No",nextId:e.no,segmentValue:"no"},q=document.createElement("button");q.type="button",q.className="uhyq-btn",q.dataset.answer="yes",q.dataset.uhyqFocus="true",q.textContent=s.label,q.addEventListener("click",()=>S(s));let k=document.createElement("button");k.type="button",k.className="uhyq-btn",k.dataset.answer="no",k.textContent=g.label,k.addEventListener("click",()=>S(g)),p.append(q,k),c?h.append(n,c,p):h.append(n,p),E=z(p),H(h),R(b,e.prompt),A({id:e.id,index:d.history.length+1})}function ie(e){I(),h.innerHTML="";let n=document.createElement("h2");n.id=`${e.id}-prompt`,n.textContent=e.prompt;let r=document.createElement("div");r.className="uhyq-choices",r.setAttribute("role","group"),r.setAttribute("aria-labelledby",n.id),(e.options||[]).forEach((i,c)=>{let p={value:i.id||i.label,label:i.label,nextId:i.next,segmentValue:i.id||i.label},s=document.createElement("button");s.type="button",s.className="uhyq-btn",c===0&&(s.dataset.uhyqFocus="true"),s.textContent=i.label,s.addEventListener("click",()=>S(p)),r.appendChild(s)}),h.append(n,r),E=z(r),H(h),R(b,e.prompt),A({id:e.id,index:d.history.length+1})}function re(e){I(),h.innerHTML="";let n=document.createElement("h2");n.textContent=e.title;let r=document.createElement("div");r.className="uhyq-body",r.innerHTML=O(e.body);let i=document.createElement("div");i.className="uhyq-outcome-actions",(e.actions||[]).forEach(c=>{let p=me(c.href,m),s=document.createElement("a");s.className="uhyq-btn uhyq-btn-secondary uhyq-link-button",s.href=p,s.target="_blank",s.rel="noopener noreferrer",s.textContent=c.label,i.appendChild(s)}),i.children.length&&i.firstElementChild?.setAttribute("data-uhyq-focus","true"),h.append(n,r,i),R(b,e.title),T({id:e.id,title:e.title}),_.disabled=d.history.length===0,H(h)}let v=null;function Fe(e){clearTimeout(v);let n=f.querySelector(".uhyq-alert");n||(n=document.createElement("div"),n.className="uhyq-alert",f.insertBefore(n,L)),n.textContent=e,v=window.setTimeout(()=>{n&&n.remove()},4e3)}function U(e){if(e.type!=="yesno"){w.textContent="You're all set";return}let n=d.history.filter(c=>{let p=o.nodes[c.id];return p&&p.type==="yesno"}).length,r=n+1,i=n+$(o,e.id);w.textContent=`Question ${r} of ${i}`}function S(e){let n=o.nodes[d.currentId];if(!n||!e||!e.nextId)return;let r=e.segmentValue??e.value??null;d.history.push({id:n.id,answer:r}),d.pathSegments.push(_e(n.id,r)),d.currentId=e.nextId,C()}function ae(){if(!d.history.length)return;let e=d.history.pop();d.pathSegments.pop(),d.currentId=e.id,C()}function M(){d.currentId=o.startId,d.history=[],d.pathSegments=[],v&&clearTimeout(v);let e=f.querySelector(".uhyq-alert");e&&e.remove(),C()}function D(e){if(!(!Array.isArray(e)||!e.length)){M();for(let n of e){if(typeof n!="string"||!n.length)break;let r,i;if(n.includes(":")?[r,i]=n.split(":"):(r=n.slice(0,-1),i=n.slice(-1)),!r)break;let c=o.nodes[d.currentId];if(!c||c.id!==r)break;if(c.type==="buttonGroup"){let g=(c.options||[]).find(q=>(q.id||q.label)===i);if(!g||!g.next)break;S({value:g.id||g.label,nextId:g.next,segmentValue:g.id||g.label});continue}if(c.type!=="yesno")break;let p=i==="y"?"yes":i==="n"?"no":i==="yes"||i==="no"?i:null;if(!p)break;let s=c[p];if(!s||(S({value:p,nextId:s,segmentValue:p}),o.nodes[d.currentId]?.type!=="yesno"&&o.nodes[d.currentId]?.type!=="buttonGroup"))break}}}function C(){let e=o.nodes[d.currentId];if(!e){h.innerHTML=G,_.disabled=!0,w.textContent="Sorry, this quiz is unavailable right now.";return}e.type==="yesno"?(U(e),ne(e),_.disabled=d.history.length===0):e.type==="buttonGroup"?(w.textContent="Select your role to begin",ie(e),_.disabled=d.history.length===0):(U(e),re(e))}return _.addEventListener("click",ae),x.addEventListener("click",()=>{window.confirm("Restart the quiz? Your answers will be cleared.")&&M()}),C(),u.length&&D(u),{destroy(){I(),N&&(N(),N=null),v&&clearTimeout(v),t.innerHTML=G},restart:M,applyPath:D}}var X=`.uhyq-card h2 p {
+  margin: 0 0 0.75rem;
+}
+
+.uhyq-card h2 ul {
+  margin: 0 0 0.75rem 1.25rem;
+  padding: 0;
+  list-style: disc;
+}
+
+.uhyq-card h2 ul:last-child {
+  margin-bottom: 0;
+}
+
+.uhyq-card h2 li {
+  margin: 0.35rem 0;
+  line-height: 1.45;
+}
+.uhyq-root {
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f8f5ff;
+  color: #2c2050;
+  border: 1px solid rgba(91, 44, 131, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(44, 32, 80, 0.15);
+  padding: 24px;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uhyq-root * {
+  box-sizing: border-box;
+}
+
+.uhyq-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.uhyq-hidden {
+  display: none !important;
+}
+
+.uhyq-progress {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #5b2c83;
+}
+
+.uhyq-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uhyq-card h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  color: #432266;
+}
+
+.uhyq-body {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.uhyq-actions,
+.uhyq-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.uhyq-btn {
+  appearance: none;
+  background-color: #5b2c83;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  outline: none;
+}
+
+.uhyq-btn:hover,
+.uhyq-btn:focus-visible {
+  background-color: #4a206e;
+}
+
+.uhyq-btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 220, 92, 0.6);
+}
+
+.uhyq-btn-secondary {
+  background-color: #ffdc5c;
+  color: #432266;
+  border: 2px solid #f6b81f;
+}
+
+.uhyq-btn-secondary:hover,
+.uhyq-btn-secondary:focus-visible {
+  background-color: #ffd13a;
+}
+
+.uhyq-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.uhyq-controls .uhyq-btn {
+  flex: 1 1 150px;
+}
+
+.uhyq-fallback {
+  padding: 16px;
+  border: 1px dashed rgba(91, 44, 131, 0.4);
+  border-radius: 12px;
+  background: #fff7d6;
+  color: #2c2050;
+  font-size: 0.95rem;
+}
+
+.uhyq-alert {
+  background: #f9ecff;
+  border-left: 4px solid #5b2c83;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.uhyq-link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.uhyq-link-button::after {
+  content: "\\2197";
+  font-size: 0.85em;
+}
+
+.uhyq-outcome-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.uhyq-muted {
+  font-size: 0.85rem;
+  color: #4a4a4a;
+}
+
+/* Tooltip styles */
+.uhyq-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+  line-height: 0;
+}
+
+.uhyq-tooltip-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  color: #5b2c83;
+  cursor: help;
+  border: none;
+  outline: none;
+  transition: color 0.2s ease, transform 0.1s ease;
+  box-sizing: content-box;
+  vertical-align: middle;
+}
+
+.uhyq-tooltip-icon:hover,
+.uhyq-tooltip-icon:focus {
+  color: #432266;
+  transform: scale(1.1);
+}
+
+.uhyq-tooltip-icon:focus-visible {
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px rgba(91, 44, 131, 0.4);
+}
+
+.uhyq-tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  background-color: #2c2050;
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: nowrap;
+  z-index: 1000;
+  pointer-events: none;
+  transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out, transform 0.15s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 280px;
+}
+
+.uhyq-tooltip-text::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: #2c2050;
+}
+
+.uhyq-tooltip-wrapper:hover .uhyq-tooltip-text,
+.uhyq-tooltip-icon:hover + .uhyq-tooltip-text,
+.uhyq-tooltip-icon:focus + .uhyq-tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 480px) {
+  .uhyq-root {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .uhyq-controls {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uhyq-btn {
+    transition: none;
+  }
+}
+
+@media print {
+  .uhyq-root {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  .uhyq-controls,
+  .uhyq-progress {
+    display: none !important;
+  }
+
+  .uhyq-outcome-actions {
+    display: block;
+  }
+
+  .uhyq-link-button::after {
+    content: " (" attr(href) ")";
+  }
+}
+
+`;var J="uhyq-style",ge=`
+  <div class="uhyq-fallback" role="note">
+    <p><strong>This tool needs JavaScript.</strong> If the quiz does not load, visit SchoolHouse Connection for <a href="https://schoolhouseconnection.org" target="_blank" rel="noopener noreferrer">resources for unaccompanied homeless youth</a>.</p>
+  </div>
+`,F=new Map;function qe(){if(typeof document>"u"||document.getElementById(J))return;let t=document.createElement("style");t.id=J,t.textContent=X,document.head.appendChild(t)}function B(t,o){if(!o)return t;let a=Array.isArray(t)?[...t]:{...t};return Object.keys(o).forEach(l=>{let u=o[l];u&&typeof u=="object"&&!Array.isArray(u)?a[l]=B(a[l]||{},u):a[l]=u}),a}function we(t){return B({},t)}function Ae(t){if(typeof t!="string"||!t.startsWith("#"))return[];let a=new URLSearchParams(t.slice(1)).get("path");return a?decodeURIComponent(a).split("-").map(u=>u.trim()).filter(Boolean):[]}function xe(t){t&&(t.innerHTML.trim()||(t.innerHTML=ge))}function W(){F.forEach(t=>{t&&typeof t.destroy=="function"&&t.destroy()}),F.clear()}function Z(){F.forEach(t=>{t&&typeof t.restart=="function"&&t.restart()})}function ee(t={}){if(typeof document>"u")return[];let{selector:o="[data-uhy-quiz]",configOverrides:a={},onStep:l,onOutcome:u}=t;qe();let m=B(we(Q),a),A=Ae(window.location.hash),T=Array.from(document.querySelectorAll(o));return T.length?T.map((f,w)=>{if(F.has(f)){let b=F.get(f);return b.restart(),b}xe(f);let h=K({container:f,tree:j,config:m,callbacks:{onStep:l,onOutcome:u},initialPathSegments:w===0?A:[]});return F.set(f,h),h}):(console.warn("UHYQuiz: no containers found for selector",o),[])}var te={init:ee,destroyAll:W,restartAll:Z};typeof window<"u"&&(window.UHYQuiz=te);var ve=te;return pe(ke);})();
+    </script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        if (window.UHYQuiz) {
+          window.UHYQuiz.init();
+        }
+      });
+    </script>
+  </body>
+</html>
+
+
+
+

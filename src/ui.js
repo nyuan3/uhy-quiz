@@ -183,6 +183,16 @@ function parseTooltips(text) {
   });
 }
 
+function parseHelpLinks(text) {
+  if (typeof text !== 'string') return text;
+  
+  // Match [helplink:word:url:label] pattern
+  return text.replace(/\[helplink:([^:]+):([^:]+):([^\]]+)\]/g, (match, word, url, label) => {
+    const helpIcon = `<a href="${url}" target="_blank" rel="noopener noreferrer" class="uhyq-helplink" aria-label="${label}" title="${label}"><svg class="uhyq-helplink-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg></a>`;
+    return `${word}${helpIcon}`;
+  });
+}
+
 function renderYesNoQuestion(node) {
     cleanupStepHandlers();
     stepRegion.innerHTML = '';
@@ -205,11 +215,14 @@ function renderYesNoQuestion(node) {
     bodyText = parts.slice(1).join('\n\n');
   }
 
-  // Parse tooltips and convert single line breaks in heading to <br> tags
-  if (headingText.includes('[tooltip:') || headingText.includes('\n')) {
+  // Parse tooltips, help links, and convert single line breaks in heading to <br> tags
+  if (headingText.includes('[tooltip:') || headingText.includes('[helplink:') || headingText.includes('\n')) {
     let processedText = headingText;
     if (processedText.includes('[tooltip:')) {
       processedText = parseTooltips(processedText);
+    }
+    if (processedText.includes('[helplink:')) {
+      processedText = parseHelpLinks(processedText);
     }
     if (processedText.includes('\n')) {
       processedText = processedText.split('\n').join('<br>');

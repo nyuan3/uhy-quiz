@@ -18,11 +18,11 @@
 }
 .uhyq-root {
   font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #f8f5ff;
-  color: #2c2050;
-  border: 1px solid rgba(91, 44, 131, 0.2);
+  background: #faf5fa;
+  color: #3d1a3d;
+  border: 1px solid rgba(138, 47, 137, 0.2);
   border-radius: 16px;
-  box-shadow: 0 12px 24px rgba(44, 32, 80, 0.15);
+  box-shadow: 0 12px 24px rgba(138, 47, 137, 0.15);
   padding: 24px;
   max-width: 480px;
   margin: 0 auto;
@@ -54,7 +54,7 @@
 .uhyq-progress {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #5b2c83;
+  color: #8a2f89;
 }
 
 .uhyq-card {
@@ -67,7 +67,7 @@
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.3;
-  color: #432266;
+  color: #8a2f89;
 }
 
 .uhyq-body {
@@ -84,7 +84,7 @@
 
 .uhyq-btn {
   appearance: none;
-  background-color: #5b2c83;
+  background-color: #8a2f89;
   color: #ffffff;
   border: none;
   border-radius: 999px;
@@ -98,22 +98,22 @@
 
 .uhyq-btn:hover,
 .uhyq-btn:focus-visible {
-  background-color: #4a206e;
+  background-color: #6e2568;
 }
 
 .uhyq-btn:focus-visible {
-  box-shadow: 0 0 0 3px rgba(255, 220, 92, 0.6);
+  box-shadow: 0 0 0 3px rgba(243, 146, 0, 0.6);
 }
 
 .uhyq-btn-secondary {
-  background-color: #ffdc5c;
-  color: #432266;
-  border: 2px solid #f6b81f;
+  background-color: #f39200;
+  color: #ffffff;
+  border: 2px solid #d98200;
 }
 
 .uhyq-btn-secondary:hover,
 .uhyq-btn-secondary:focus-visible {
-  background-color: #ffd13a;
+  background-color: #d98200;
 }
 
 .uhyq-controls {
@@ -129,16 +129,16 @@
 
 .uhyq-fallback {
   padding: 16px;
-  border: 1px dashed rgba(91, 44, 131, 0.4);
+  border: 1px dashed rgba(138, 47, 137, 0.4);
   border-radius: 12px;
-  background: #fff7d6;
-  color: #2c2050;
+  background: #fff7e6;
+  color: #3d1a3d;
   font-size: 0.95rem;
 }
 
 .uhyq-alert {
-  background: #f9ecff;
-  border-left: 4px solid #5b2c83;
+  background: #fdf2fa;
+  border-left: 4px solid #8a2f89;
   padding: 12px 16px;
   border-radius: 8px;
   font-size: 0.95rem;
@@ -182,24 +182,26 @@
   width: 16px;
   height: 16px;
   padding: 0;
-  color: #5b2c83;
+  color: #f39200;
+  stroke: #f39200;
   cursor: help;
   border: none;
   outline: none;
-  transition: color 0.2s ease, transform 0.1s ease;
+  transition: color 0.2s ease, stroke 0.2s ease, transform 0.1s ease;
   box-sizing: content-box;
   vertical-align: middle;
 }
 
 .uhyq-tooltip-icon:hover,
 .uhyq-tooltip-icon:focus {
-  color: #432266;
+  color: #d98200;
+  stroke: #d98200;
   transform: scale(1.1);
 }
 
 .uhyq-tooltip-icon:focus-visible {
   border-radius: 4px;
-  box-shadow: 0 0 0 2px rgba(91, 44, 131, 0.4);
+  box-shadow: 0 0 0 2px rgba(243, 146, 0, 0.4);
 }
 
 .uhyq-tooltip-text {
@@ -209,7 +211,7 @@
   top: calc(100% + 4px);
   left: 50%;
   transform: translateX(-50%) translateY(-4px);
-  background-color: #2c2050;
+  background-color: #8a2f89;
   color: #ffffff;
   padding: 10px 14px;
   border-radius: 8px;
@@ -231,7 +233,7 @@
   left: 50%;
   transform: translateX(-50%);
   border: 6px solid transparent;
-  border-bottom-color: #2c2050;
+  border-bottom-color: #8a2f89;
 }
 
 .uhyq-tooltip-wrapper:hover .uhyq-tooltip-text,
@@ -240,6 +242,43 @@
   visibility: visible;
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+/* Help link styles */
+.uhyq-helplink {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-left: 4px;
+  color: #f39200;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.uhyq-helplink:hover,
+.uhyq-helplink:focus {
+  color: #d98200;
+}
+
+.uhyq-helplink:focus-visible {
+  outline: 2px solid rgba(243, 146, 0, 0.4);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+.uhyq-helplink-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  stroke: #f39200;
+  transition: stroke 0.2s ease, transform 0.1s ease;
+}
+
+.uhyq-helplink:hover .uhyq-helplink-icon,
+.uhyq-helplink:focus .uhyq-helplink-icon {
+  stroke: #d98200;
+  transform: scale(1.1);
 }
 
 @media (max-width: 480px) {
@@ -278,4 +317,3 @@
     content: " (" attr(href) ")";
   }
 }
-
