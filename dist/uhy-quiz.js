@@ -77,7 +77,7 @@ Note that the following circumstances on their own do not qualify for a dependen
 .uhyq-root {
   font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
   background: #faf5fa;
-  color: #3d1a3d;
+  color: #000000;
   border: 1px solid rgba(138, 47, 137, 0.2);
   border-radius: 16px;
   box-shadow: 0 12px 24px rgba(138, 47, 137, 0.15);
@@ -112,7 +112,7 @@ Note that the following circumstances on their own do not qualify for a dependen
 .uhyq-progress {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #8a2f89;
+  color: #000000;
 }
 
 .uhyq-card {
@@ -125,7 +125,7 @@ Note that the following circumstances on their own do not qualify for a dependen
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.3;
-  color: #8a2f89;
+  color: #000000;
 }
 
 .uhyq-body {
@@ -190,7 +190,7 @@ Note that the following circumstances on their own do not qualify for a dependen
   border: 1px dashed rgba(138, 47, 137, 0.4);
   border-radius: 12px;
   background: #fff7e6;
-  color: #3d1a3d;
+  color: #000000;
   font-size: 0.95rem;
 }
 
@@ -223,7 +223,7 @@ Note that the following circumstances on their own do not qualify for a dependen
 
 .uhyq-muted {
   font-size: 0.85rem;
-  color: #4a4a4a;
+  color: #000000;
 }
 
 /* Tooltip styles */
