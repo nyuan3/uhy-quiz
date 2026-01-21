@@ -281,6 +281,50 @@
   transform: scale(1.1);
 }
 
+.uhyq-helplink-wrapper {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.uhyq-helplink-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  background-color: #f39200;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  z-index: 1000;
+  pointer-events: none;
+  transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out, transform 0.15s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.uhyq-helplink-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: #f39200;
+}
+
+.uhyq-helplink-wrapper:hover .uhyq-helplink-tooltip,
+.uhyq-helplink:focus + .uhyq-helplink-tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 @media (max-width: 480px) {
   .uhyq-root {
     padding: 20px;

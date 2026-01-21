@@ -186,9 +186,9 @@ function parseTooltips(text) {
 function parseHelpLinks(text) {
   if (typeof text !== 'string') return text;
   
-  // Match [helplink:word:url:label] pattern
-  return text.replace(/\[helplink:([^:]+):([^:]+):([^\]]+)\]/g, (match, word, url, label) => {
-    const helpIcon = `<a href="${url}" target="_blank" rel="noopener noreferrer" class="uhyq-helplink" aria-label="${label}" title="${label}"><svg class="uhyq-helplink-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg></a>`;
+  // Match [helplink:word:url:label] pattern (url can contain colons like https://)
+  return text.replace(/\[helplink:([^:]+):(https?:\/\/[^:\s]+):([^\]]+)\]/g, (match, word, url, label) => {
+    const helpIcon = `<span class="uhyq-helplink-wrapper"><a href="${url}" target="_blank" rel="noopener noreferrer" class="uhyq-helplink" aria-label="${label}"><svg class="uhyq-helplink-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg></a><span class="uhyq-helplink-tooltip">${label}</span></span>`;
     return `${word}${helpIcon}`;
   });
 }
@@ -328,7 +328,11 @@ function renderYesNoQuestion(node) {
 
     const bodyEl = document.createElement('div');
     bodyEl.className = 'uhyq-body';
-    bodyEl.innerHTML = formatPromptMarkup(node.body);
+    let bodyContent = formatPromptMarkup(node.body);
+    if (bodyContent.includes('[helplink:')) {
+      bodyContent = parseHelpLinks(bodyContent);
+    }
+    bodyEl.innerHTML = bodyContent;
 
     const actionsEl = document.createElement('div');
     actionsEl.className = 'uhyq-outcome-actions';

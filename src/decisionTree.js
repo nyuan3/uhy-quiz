@@ -177,7 +177,7 @@ const decisionTree = {
       type: "outcome",
       title: "Request a determination letter from your high school",
       body:
-        "You were identified as an unaccompanied homeless youth by your high school. Contact your McKinney-Vento liaison or high school counselor and request a written determination letter stating that you are (or were) an unaccompanied homeless youth. First, submit the FAFSA as an independent student, without parent information, and then give this documentation to your financial aid office.",
+        "You were identified as an unaccompanied homeless youth by your high school. Contact your McKinney-Vento [helplink:liaison:https://schoolhouseconnection.org/homeless-education-directory:Find your liaison] or high school counselor and request a written determination letter stating that you are (or were) an unaccompanied homeless youth. First, submit the FAFSA as an independent student, without parent information, and then give this documentation to your financial aid office.",
       actions: [
         {
           label: "Find your McKinney-Vento liaison",
@@ -197,7 +197,7 @@ const decisionTree = {
       type: "outcome",
       title: "Talk to your high school about being identified under McKinney-Vento",
       body:
-        "Because your high school staff know about your homelessness, contact your McKinney-Vento liaison or school counselor to be formally identified as homeless under the McKinney-Vento Act. Once identified, you can request a determination letter as an unaccompanied homeless youth to give to your financial aid office.",
+        "Because your high school staff know about your homelessness, contact your McKinney-Vento [helplink:liaison:https://schoolhouseconnection.org/homeless-education-directory:Find your liaison] or school counselor to be formally identified as homeless under the McKinney-Vento Act. Once identified, you can request a determination letter as an unaccompanied homeless youth to give to your financial aid office.",
       actions: [
         {
           label: "Find your McKinney-Vento liaison",
@@ -217,7 +217,7 @@ const decisionTree = {
       type: "outcome",
       title: "Ask a program or liaison to provide a determination",
       body:
-        "Someone who knows your situation (such as a McKinney-Vento liaison, shelter or program director, TRIO/GEAR UP staff, or a financial aid administrator) can provide a written determination that you are an unaccompanied homeless youth. First, submit the FAFSA as an independent student, without parent information, and then give this documentation to your financial aid office.",
+        "Someone who knows your situation (such as a McKinney-Vento [helplink:liaison:https://schoolhouseconnection.org/homeless-education-directory:Find your liaison], shelter or program director, TRIO/GEAR UP staff, or a financial aid administrator) can provide a written determination that you are an unaccompanied homeless youth. First, submit the FAFSA as an independent student, without parent information, and then give this documentation to your financial aid office.",
       actions: [
         {
           label: "Sample determination letters",
