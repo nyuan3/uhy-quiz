@@ -72,7 +72,7 @@ export function createQuiz({ container, tree, config, callbacks = {}, initialPat
   const root = document.createElement('div');
   root.className = 'uhyq-root';
   root.setAttribute('role', 'application');
-  root.setAttribute('aria-label', 'Unaccompanied homeless youth determination quiz');
+  root.setAttribute('aria-label', 'Interactive unaccompanied homeless youth determination tool');
 
   const progressEl = document.createElement('div');
   progressEl.className = 'uhyq-progress';
