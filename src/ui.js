@@ -129,12 +129,12 @@ export function createQuiz({ container, tree, config, callbacks = {}, initialPat
     }
   }
 
-function formatPromptSegment(text) {
+function formatPromptSegment(text, parseLinks = false) {
   if (!text) return '';
   if (text.includes('\n\n')) {
     return text
       .split('\n\n')
-      .map((segment) => formatPromptSegment(segment.trim()))
+      .map((segment) => formatPromptSegment(segment.trim(), parseLinks))
       .join('');
   }
   if (text.includes('\n•') || text.trim().startsWith('•')) {
@@ -147,7 +147,7 @@ function formatPromptSegment(text) {
     if (bulletStartIndex > 0) {
       const introText = lines.slice(0, bulletStartIndex).join(' ').trim();
       if (introText) {
-        result += `<p>${introText}</p>`;
+        result += `<p>${parseLinks ? parseHelpLinks(introText) : introText}</p>`;
       }
     }
     
@@ -158,19 +158,19 @@ function formatPromptSegment(text) {
       .map((item) => item.trim())
       .filter(Boolean);
     
-    result += `<ul class="uhyq-bullet-list">${bullets.map((item) => `<li>${item}</li>`).join('')}</ul>`;
+    result += `<ul class="uhyq-bullet-list">${bullets.map((item) => `<li>${parseLinks ? parseHelpLinks(item) : item}</li>`).join('')}</ul>`;
     return result;
   }
 
-  return `<p>${text}</p>`;
+  return `<p>${parseLinks ? parseHelpLinks(text) : text}</p>`;
 }
 
-function formatPromptMarkup(text) {
+function formatPromptMarkup(text, parseLinks = false) {
   if (typeof text !== 'string' || !text.includes('\n')) {
-    return text;
+    return parseLinks && text.includes('[helplink:') ? parseHelpLinks(text) : text;
   }
 
-  return formatPromptSegment(text.trim());
+  return formatPromptSegment(text.trim(), parseLinks);
 }
 
 function parseTooltips(text) {
@@ -237,7 +237,7 @@ function renderYesNoQuestion(node) {
   if (bodyText) {
     bodyEl = document.createElement('div');
     bodyEl.className = 'uhyq-body';
-    bodyEl.innerHTML = formatPromptMarkup(bodyText);
+    bodyEl.innerHTML = formatPromptMarkup(bodyText, true);
   }
 
     const choicesEl = document.createElement('div');
@@ -328,11 +328,7 @@ function renderYesNoQuestion(node) {
 
     const bodyEl = document.createElement('div');
     bodyEl.className = 'uhyq-body';
-    let bodyContent = formatPromptMarkup(node.body);
-    if (bodyContent.includes('[helplink:')) {
-      bodyContent = parseHelpLinks(bodyContent);
-    }
-    bodyEl.innerHTML = bodyContent;
+    bodyEl.innerHTML = formatPromptMarkup(node.body, true);
 
     const actionsEl = document.createElement('div');
     actionsEl.className = 'uhyq-outcome-actions';

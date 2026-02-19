@@ -334,6 +334,10 @@
   .uhyq-controls {
     flex-direction: column;
   }
+
+  .uhyq-controls .uhyq-btn {
+    padding: 6px 20px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
